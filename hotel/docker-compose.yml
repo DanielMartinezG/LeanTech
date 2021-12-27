@@ -1,0 +1,7 @@
+version: '2'
+services:
+  booking-server:
+    container_name: hotel-server
+    build: ./
+    ports:
+      - 8081:8081

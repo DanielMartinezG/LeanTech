@@ -1,0 +1,12 @@
+version: '2'
+services:
+  hotel-server:
+    container_name: hotel-server
+    build: ../hotel/
+    ports:
+      - 8081:8081
+  hotel-consumer:
+    container_name: hotel-consumer
+    build: ../hotel-consumer/
+    ports:
+      - 8082:8082
