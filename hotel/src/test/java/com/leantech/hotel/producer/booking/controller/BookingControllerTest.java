@@ -43,7 +43,7 @@ public class BookingControllerTest {
         .titularReserva("Daniel Martínez")
         .build();
 
-    final String responseMessage = "La reserva se está procesando correctamente, pronto recibirá un correo con el resultado";
+    String responseMessage = "La reserva se está procesando correctamente, pronto recibirá un correo con el resultado";
 
     given(this.bookingService.process(bookingDto)).willReturn(responseMessage);
 

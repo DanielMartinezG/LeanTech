@@ -11,6 +11,7 @@ import com.leanteach.hotel.consumer.entity.Person;
 import com.leanteach.hotel.consumer.entity.Room;
 import com.leanteach.hotel.consumer.integration.mail.MailSenderService;
 import com.leanteach.hotel.consumer.room.service.RoomService;
+import com.leanteach.hotel.consumer.util.Messages;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -46,6 +47,9 @@ public class BookingServiceImplTest {
   @Mock
   private MailSenderService mailSenderService;
 
+  @Mock
+  private Messages messages;
+
   private BookingServiceImpl bookingservice;
 
 
@@ -57,6 +61,7 @@ public class BookingServiceImplTest {
     bookingService.setMailSenderService(mailSenderService);
     bookingService.setValidator(validator);
     bookingService.setRoomService(roomService);
+    bookingService.setMessages(messages);
     bookingService.setDefaultMailTo("danielmartinezg95@gmail.com");
 
     this.bookingservice = bookingService;
