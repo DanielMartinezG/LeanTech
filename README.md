@@ -1,3 +1,35 @@
+Este proyecto cuenta con dos micro servicios;
+Hotel (puerto 8081): se encarga de manejar las peticiones por medio de APIs restful y en el caso de que la petición sea para grabar la reserva
+este micro servicio se encarga de encolar en una cola SQS de Amazon el mensaje.
+
+Hotel-consumer (puerto 8082): este micro servicio se encarga de estar leyendo la cola de amazon, cuándo hay un mensaje en la cola este se procesa, se le hacen todas las validaciones,
+y se guarda en la BD, en caso de que haya algún error en la reserva se le comunica por medio de un correo electrónico al cliente y en caso de que salga exitosa también se
+le suministra la información de su reserva por medio de un correo
+
+## End points
+##Registrar reserva: 
+url: http://localhost:8081/registrar-reserva
+body:   
+{
+    "fechaIngreso" : "2021-12-27",
+    "fechaSalida" : "2021-12-31",
+    "totalDias" : "4",
+    "numeroPersonas": "2",
+    "titularReserva": "Daniel Martinez",
+    "numeroHabitaciones" : "0",
+    "numeroMenores" : "0",
+    "email": "suemail@gmail.com"
+}
+
+Verbo http: POST
+
+nota: en este request el campo email es opcional y en el caso de que se envíe ese será el email al que se mandará el mensaje de confirmación. Este email debe ser verificado previamente en la consola de amazon
+
+##Consultar reserva:
+url:http://localhost:8081/consultar-reserva
+Verbo http: GET
+
+
 
 ## Dependencias:
 
