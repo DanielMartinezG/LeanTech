@@ -14,6 +14,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Range;
 
 @Data
 @Builder
@@ -28,12 +29,15 @@ public class BookingDto {
   @NotNull(message = "La fecha de salida es un campo obligatorio")
   private LocalDate fechaSalida;
   @NotNull(message = "El total de días es un campo obligatorio")
+  @Range(min = 1, message= "El número de dias debe ser mayor a 0")
   private Integer totalDias;
   @NotNull(message = "El número de personas es un campo obligatorio")
+  @Range(min = 1, message= "El número de personas debe ser mayor a 0")
   private Integer numeroPersonas;
   @NotBlank(message = "El titular de la reserva es un campo obligatorio")
   private String titularReserva;
   @NotNull(message = "Número de habitaciones es un campo obligatorio")
+  @Range(min = 1, message= "El número de habitaciones debe ser mayor a 0")
   private Integer numeroHabitaciones;
   @NotNull(message = "La cantidad de menores es un campo obligatorio")
   private Integer numeroMenores;
