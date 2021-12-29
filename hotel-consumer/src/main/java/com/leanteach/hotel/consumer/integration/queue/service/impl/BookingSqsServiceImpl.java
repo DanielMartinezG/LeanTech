@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.aws.messaging.config.annotation.EnableSqs;
+import org.springframework.mail.MailSendException;
 import org.springframework.stereotype.Component;
 
 @AllArgsConstructor
@@ -34,6 +35,8 @@ public class BookingSqsServiceImpl implements BookingQueueService {
       throw new QueueException("An error has occurred while mapping the message to SavingBookingDto", e);
     } catch (BookingValidationException e) {
       log.error("Validation Error", e);
+    } catch (MailSendException e) {
+      log.error("You got an error while sending the email", e);
     }
   }
 }

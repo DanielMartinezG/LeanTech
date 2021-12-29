@@ -1,6 +1,7 @@
 package com.leantech.hotel.producer.booking.service.impl;
 
 import com.amazonaws.util.CollectionUtils;
+import com.amazonaws.util.StringUtils;
 import com.leantech.hotel.producer.booking.dao.BookingDao;
 import com.leantech.hotel.producer.booking.domain.dto.BookingDto;
 import com.leantech.hotel.producer.booking.mapper.BookingMapper;
@@ -62,6 +63,7 @@ public class BookingServiceImpl implements BookingService {
     BookingDto bookingDto = bookingMapper.toBookingDto(booking);
     bookingDto.setNumeroHabitaciones(getNumeroHabitaciones(booking));
     bookingDto.setTitularReserva(getTitularReserva(booking));
+    bookingDto.setEmail(getEmail(booking));
 
     return bookingDto;
   }
@@ -75,6 +77,17 @@ public class BookingServiceImpl implements BookingService {
   private String getTitularReserva(Booking booking) {
     log.info("Method BookingServiceImpl.getTitularReserva() booking Object:" + booking);
     return booking != null && booking.getReservationHolder() != null ? booking.getReservationHolder().getName() : "";
+  }
+
+  /**
+   * fill the field "email" from booking
+   *
+   * @param booking
+   * @return
+   */
+  private String getEmail(Booking booking) {
+    log.info("Method BookingServiceImpl.getEmail() booking Object:" + booking);
+    return booking != null && booking.getReservationHolder() != null && !StringUtils.isNullOrEmpty(booking.getReservationHolder().getEmail())? booking.getReservationHolder().getEmail() : "";
   }
 
   /**
