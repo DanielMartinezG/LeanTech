@@ -20,4 +20,9 @@ public interface BookingService {
    */
   List<BookingDto> findAll();
 
+  /**
+   * Get a booking by id
+   */
+  BookingDto findById(Long id);
+
 }

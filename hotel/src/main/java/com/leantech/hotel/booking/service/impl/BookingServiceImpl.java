@@ -4,12 +4,14 @@ import com.amazonaws.util.CollectionUtils;
 import com.amazonaws.util.StringUtils;
 import com.leantech.hotel.booking.dao.BookingDao;
 import com.leantech.hotel.booking.domain.dto.BookingDto;
+import com.leantech.hotel.booking.exception.BookingException;
 import com.leantech.hotel.booking.mapper.BookingMapper;
 import com.leantech.hotel.booking.service.BookingService;
 import com.leantech.hotel.entity.Booking;
 import com.leantech.hotel.integration.queue.service.BookingSqsService;
 import com.leantech.hotel.util.Messages;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import lombok.AllArgsConstructor;
@@ -50,6 +52,16 @@ public class BookingServiceImpl implements BookingService {
     return StreamSupport.stream(bookingDao.findAll().spliterator(), false)
         .map(booking -> mapToBookingDto(booking))
         .collect(Collectors.toList());
+  }
+
+  @Override
+  public BookingDto findById(Long id) {
+    log.info("Method BookingServiceImpl.findById()");
+    Optional<Booking> booking = bookingDao.findById(id);
+    if (!booking.isEmpty()) {
+      return mapToBookingDto(booking.get());
+    }
+    throw new BookingException(message.getMessages("booking.not.found"));
   }
 
   /**

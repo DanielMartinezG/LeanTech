@@ -141,6 +141,7 @@ public class BookingServiceImpl implements BookingService {
     bodyMessage.append(messages.getMessages("booking.success.fecha.ingreso.correo") + booking.getDateFrom().format(formatter) + "\n");
     bodyMessage.append(messages.getMessages("booking.success.fecha.salida.correo") + booking.getDateTo().format(formatter) + "\n");
     bodyMessage.append(messages.getMessages("booking.success.numero.personas.correo") + booking.getNumberOfPeople() + "\n");
+    bodyMessage.append(messages.getMessages("booking.success.numero.reserva.correo") + booking.getId() + "\n");
     bodyMessage.append("\n " + messages.getMessages("booking.success.gracias.por.preferirnos.correo"));
     return bodyMessage;
   }
